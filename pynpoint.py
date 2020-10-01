@@ -8,9 +8,10 @@ class MCP:
         self.port:str = port
         self.lib = ctypes.CDLL("libmcp.so")
         self.handle: Optional[int] = None
+        self._init()
 
     def _init(self) -> None:
-        port = ctypes.c_char_p(self.port)
+        port = ctypes.c_char_p(self.port.encode())
         handle = self.lib.f511_init(port)
         if handle < 0:
             raise IOError(f"Got non negative return value from init function. ({handle})")
@@ -21,8 +22,8 @@ class MCP:
         if self.handle is None:
             raise IOError("Handle is not initialized!")
         
-        channel1 = ctypes.c_int
-        channel2 = ctypes.c_int
+        channel1 = ctypes.c_int()
+        channel2 = ctypes.c_int()
         result = self.lib.f511_get_power(ctypes.byref(channel1),
                  ctypes.byref(channel2), ctypes.c_int(self.handle))
         if result.value == 0:
