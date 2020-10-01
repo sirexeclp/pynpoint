@@ -24,9 +24,9 @@ class MCP:
         
         channel1 = ctypes.c_int()
         channel2 = ctypes.c_int()
-        result = self.lib.f511_get_power(ctypes.byref(channel1),
+        result: int = self.lib.f511_get_power(ctypes.byref(channel1),
                  ctypes.byref(channel2), ctypes.c_int(self.handle))
-        if result.value == 0:
+        if result == 0:
             return channel1.value, channel2.value
         else:
             raise IOError(f"Got non zero return code ({result.value})!")
