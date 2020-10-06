@@ -1,2 +1,2 @@
 all:
-	gcc -shared -o libmcp.so -fPIC c_src/mcp_com.c
+	gcc -shared -o pynpoint/libmcp.so -fPIC src/mcp_com.c

@@ -1,12 +1,14 @@
 import ctypes
 from typing import Optional, Tuple
+import pathlib
 
 class MCP:
     def __init__(self, port:str):
         if not isinstance(port, str):
             raise TypeError("port must be of type str!")
         self.port:str = port
-        self.lib = ctypes.CDLL("libmcp.so")
+        lib_path = pathlib.Path(__file__).parent.absolute() / "libmcp.so"
+        self.lib = ctypes.CDLL(lib_path)
         self.handle: Optional[int] = None
         self._init()
 
