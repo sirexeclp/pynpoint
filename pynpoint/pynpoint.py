@@ -6,7 +6,7 @@ class MCP:
         if not isinstance(port, str):
             raise TypeError("port must be of type str!")
         self.port:str = port
-        self.lib = ctypes.CDLL("./libmcp.so")
+        self.lib = ctypes.CDLL("libmcp.so")
         self.handle: Optional[int] = None
         self._init()
 
