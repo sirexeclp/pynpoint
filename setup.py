@@ -11,7 +11,7 @@ class build_ext(build_ext_orig):
         return fullname+".so"
 
 
-extension = setuptools.Extension("libmcp", ["src/mcp_com.c"])
+extension = setuptools.Extension("pynpoint.libmcp", ["src/mcp_com.c"])
 
 setuptools.setup(
     name="pynpoint", # Replace with your own username
